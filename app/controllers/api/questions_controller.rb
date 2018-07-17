@@ -11,6 +11,8 @@ class Api::QuestionsController < ApplicationController
       tittle: params[:tittle],
       text: params[:text],
       symptoms: params[:symptoms],
+      animal_id: params[:animal_id],
+      user_id: 1
     )
     @question.save
     render "show.json.jbuilder"
