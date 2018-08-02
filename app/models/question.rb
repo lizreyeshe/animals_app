@@ -4,4 +4,8 @@ class Question < ApplicationRecord
 
   has_many :answers
   has_many :images
+
+  def friendly_created_at
+    created_at.strftime("%A, %b %d")
+  end 
 end

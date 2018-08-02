@@ -12,9 +12,17 @@ class Api::QuestionsController < ApplicationController
       text: params[:text],
       symptoms: params[:symptoms],
       animal_id: params[:animal_id],
-      user_id: 1
+      user_id: current_user.id,
     )
+    puts current_user.id
     @question.save
+
+     @image = Image.new(
+      image_url: params[:image_url],
+      question_id: @question.id
+      )
+
+     @image.save
     render "show.json.jbuilder"
 
   end 
@@ -31,7 +39,17 @@ class Api::QuestionsController < ApplicationController
     @question.text = params[:text] || @question.text
     @question.symptoms = params[:text] || @question.text
 
+    @question.save
+
     render "show.json.jbuilder"
+  end 
+
+  def destroy 
+    question_id = params[:id]
+    @question = Question.find(question_id)
+    @question.destroy
+    render json: {message: "Question has been successfully deleted"}
+
   end 
 
   def destroy 

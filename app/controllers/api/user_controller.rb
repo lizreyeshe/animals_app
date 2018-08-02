@@ -14,6 +14,11 @@ def create
     render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity
   end
 end
+  
+def profile 
+  @user = current_user 
+  render 'show.json.jbuilder'
+end 
 
   
 end

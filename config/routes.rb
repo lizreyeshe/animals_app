@@ -23,10 +23,15 @@ Rails.application.routes.draw do
     get "/answers" => "answers#index"
     post "/answers" => "answers#create"
     get "/answers/:id" => "answers#show"
-    patch "/answers/:id" => "answers#patch"
+    patch "/answers/:id" => "answers#update"
     delete "/answers/:id" => "answers#destroy"
 
+    #images
+    get "/images" => "images#index"
+    post "/images" => "images#create"
+
     #users
+    get "/users/:id" => "users#profile"
     post "/users" => "users#create"
   end 
 

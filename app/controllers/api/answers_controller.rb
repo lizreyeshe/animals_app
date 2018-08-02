@@ -7,7 +7,9 @@ class Api::AnswersController < ApplicationController
 
   def create 
     @answer = Answer.new(
-      text: params[:text]
+      text: params[:text],
+      question_id: params[:question_id],
+      user_id: current_user.id
       )
     @answer.save
     render "show.json.jbuilder"
@@ -20,15 +22,15 @@ class Api::AnswersController < ApplicationController
 
   def update
     @answer = Answer.find_by(id:params[:id])
-
     @answer.text = params[:text] || @question.text
-
+    
+    @answer.save
     render "show.json.jbuilder"
   end 
 
   def destroy
-    @answer = Answer.find_by(id:params[:id])
-
+    answer_id = params[:id]
+    @answer = Answer.find(answer_id)
     @answer.destroy
     render json: {message: "Answer has deleted"}
   end 
